@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="تیم توسعه فرانت‌اند کدپال، متخصص در طراحی وب‌سایت‌های مدرن، رابط کاربری و تجربه کاربری با استفاده از تکنولوژی‌های پیشرفته.">
+    <meta name="keywords" content="توسعه فرانت‌اند, طراحی وب, رابط کاربری, تجربه کاربری, کدپال">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="تیم کدپال">
+    <title>کدپال | تیم توسعه فرانت‌اند</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+
+    <!-- Load stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Fallback for Font Awesome -->
+    <script>
+        if (!document.createStyleSheet) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = '/local/font-awesome.min.css';
+            document.head.appendChild(link);
+        }
+    </script>
+
+    <!-- Load scripts with defer -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Error handling for scripts -->
+    <script>
+        window.onerror = function(msg, url, line) {
+            console.error(`Error: ${msg}\nURL: ${url}\nLine: ${line}`);
+            return false;
+        };
+    </script>
+
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --accent-orange: #F59E0B;
+            --bg-light: #F9FAFB;
+            --bg-dark: #111827;
+            --text-light: #1F2937;
+            --text-dark: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --neutral-light: #E5E7EB;
+            --neutral-dark: #4B5563;
+        }
+
+        [data-theme="dark"] {
+            --bg-light: #111827;
+            --bg-dark: #1F2937;
+            --text-light: #F9FAFB;
+            --text-dark: #E5E7EB;
+            --card-bg: rgba(55,65,81,0.8);
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.7;
+            transition: background 0.5s, color 0.5s;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .skill-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, var(--secondary), var(--accent-green));
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin: 0.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        /* بقیه استایل‌ها */
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .tech-icon i {
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .counter:hover {
+            transform: scale(1.1);
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            animation: blob 20s infinite;
+        }
+
+        @keyframes blob {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .team-member-image {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member-image:hover {
+            transform: scale(1.1);
+        }
+
+        .project-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.3s ease, color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .contact-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-icon:hover {
+            transform: scale(1.1);
+        }
+
+        [data-theme="dark"] .glass-card {
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .skill-badge {
+            background: linear-gradient(45deg, var(--primary-dark), var(--secondary));
+        }
+
+        [data-theme="dark"] .project-card::before {
+            background: linear-gradient(45deg, rgba(29, 78, 216, 0.8), rgba(59, 130, 246, 0.8));
+        }
+
+        /* Dark theme specific overrides */
+        [data-theme="dark"] .text-gray-400 { color: var(--neutral-light); } /* Footer text */
+        [data-theme="dark"] .text-gray-600 { color: var(--neutral-light); } /* Theme toggle, mobile menu button, team card text */
+        [data-theme="dark"] .text-gray-700 { color: var(--text-dark); } /* Hero paragraph, Contact paragraph, Contact links */
+        [data-theme="dark"] a.text-gray-700:hover { color: var(--secondary); } /* Contact link hover */
+        [data-theme="dark"] #mobile-menu { background-color: var(--bg-dark); border-color: var(--neutral-dark); }
+        [data-theme="dark"] #mobile-menu a { color: var(--text-dark); }
+        [data-theme="dark"] #mobile-menu a:hover { background-color: rgba(55, 65, 81, 0.8); }
+        [data-theme="dark"] header { background: rgba(31, 41, 55, 0.9); border-color: var(--neutral-dark); }
+        [data-theme="dark"] .filter-btn { background: var(--bg-dark); color: var(--text-dark); }
+        [data-theme="dark"] .filter-btn.active { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+        [data-theme="dark"] .filter-btn:hover { background: var(--primary); color: white; }
+        [data-theme="dark"] a.border-blue-600 { border-color: var(--secondary); color: var(--secondary); }
+        [data-theme="dark"] a.border-blue-600:hover { background-color: var(--secondary); border-color: var(--secondary); color: white; }
+        [data-theme="dark"] .contact-card .contact-icon { background-color: var(--neutral-dark); }
+        [data-theme="dark"] .contact-card .contact-icon i { color: var(--secondary); }
+        [data-theme="dark"] .contact-card:hover .contact-icon { background-color: var(--secondary); }
+        [data-theme="dark"] .contact-card:hover .contact-icon i { color: white; }
+        [data-theme="dark"] .social-icon { background: var(--neutral-dark); color: var(--text-dark); }
+        [data-theme="dark"] .social-icon:hover { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+
+        #loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(45deg, #2563EB, #1D4ED8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity .5s;
+}
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        /* بهینه‌سازی برای دستگاه‌های موبایل */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .team-card {
+                margin-bottom: 2rem;
+            }
+            
+            .tech-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tech-stack {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .tech-stack {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><div class="loader-logo">کدپال</div></div>
+
+    <!-- Floating Button -->
+    <a href="#contact" class="floating-button" aria-label="تماس با ما">
+        <i class="fas fa-comment-dots fa-lg"></i>
+    </a>
+
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black gradient-text" aria-label="صفحه اصلی">کدپال</a>
+            <div class="hidden md:flex items-center">
+                <a href="#about" class="nav-link ">درباره ما</a>
+                <a href="#team" class="nav-link mr-12">اعضای تیم</a>
+                <a href="#projects" class="nav-link mr-12">پروژه‌ها</a>
+                <a href="#contact" class="nav-link mr-12">تماس با ما</a>
+            </div>
+            <button id="theme-toggle" class="text-gray-600 hover:text-blue-600 transition transform hover:scale-110" aria-label="تغییر تم">
+                <i class="fa-solid fa-moon fa-lg"></i>
+            </button>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600" aria-label="منوی موبایل">
+                <i class="fa-solid fa-bars fa-lg"></i>
+            </button>
+        </nav>
+        <div style="flex-direction: row-reverse;" id="mobile-menu" class="md:hidden hidden bg-white border-t">   
+            <a href="#about" class="block px-6 py-2 hover:bg-gray-100">درباره ما</a>
+            <a href="#team" class="block px-6 py-2 hover:bg-gray-100">اعضای تیم</a>
+            <a href="#projects" class="block px-6 py-2 hover:bg-gray-100">پروژه‌ها</a>
+            <a href="#contact" class="block px-6 py-2 hover:bg-gray-100">تماس با ما</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="about" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="blob"></div>
+            <div class="blob" style="animation-delay: -10s;"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-black mb-6"><span class="gradient-text">کدپال</span> | تیم توسعه فرانت‌اند</h1>
+                <div class="text-2xl text-blue-600 mb-4"><span id="typed-text"></span></div>
+                <p class="text-gray-700 mb-8 max-w-2xl mx-auto">ما در کدپال با استفاده از جدیدترین تکنولوژی‌ها، تجربه‌های کاربری خیره‌کننده خلق می‌کنیم.</p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:shadow-lg transition" aria-label="مشاهده پروژه‌ها">مشاهده پروژه‌ها</a>
+                    <a href="#contact" class="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition" aria-label="شروع همکاری">شروع همکاری</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">اعضای تیم ما</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <article class="glass-card p-8 text-center" data-tilt>
+                        <div class="team-member-image">
+                            <i class="fas fa-paint-brush fa-3x text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">طراح UI/UX</h3>
+                        <p class="text-blue-600 mb-4">Figma & Adobe XD</p>
+                        <p class="text-gray-600 mb-6">طراح تجربه‌های کاربری خلاقانه و کاربرپسند</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="skill-badge">UI Design</span>
+                            <span class="skill-badge">UX Research</span>
+                            <span class="skill-badge">Prototyping</span>
+                            <span class="skill-badge">Wireframing</span>
+                            <span class="skill-badge">User Testing</span>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="لینکدین طراح UI/UX">
+                                <i class="fa-brands fa-linkedin fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="گیت‌هاب طراح UI/UX">
+                                <i class="fa-brands fa-github fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="دریبل طراح UI/UX">
+                                <i class="fa-brands fa-dribbble fa-lg"></i>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="glass-card p-8 text-center" data-tilt>
+                        <div class="team-member-image">
+                            <i class="fas fa-code fa-3x text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">توسعه‌دهنده فرانت‌اند</h3>
+                        <p class="text-blue-600 mb-4">React & Vue.js</p>
+                        <p class="text-gray-600 mb-6">متخصص در توسعه رابط‌های کاربری مدرن و واکنش‌گرا</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="skill-badge">React</span>
+                            <span class="skill-badge">Vue.js</span>
+                            <span class="skill-badge">TypeScript</span>
+                            <span class="skill-badge">Next.js</span>
+                            <span class="skill-badge">Tailwind CSS</span>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="لینکدین توسعه‌دهنده فرانت‌اند">
+                                <i class="fa-brands fa-linkedin fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="گیت‌هاب توسعه‌دهنده فرانت‌اند">
+                                <i class="fa-brands fa-github fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="استک‌اوورفلو توسعه‌دهنده فرانت‌اند">
+                                <i class="fa-brands fa-stack-overflow fa-lg"></i>
+                            </a>
+                        </div>
+                    </article>
+                    <article class="glass-card p-8 text-center" data-tilt>
+                        <div class="team-member-image">
+                            <i class="fas fa-bug fa-3x text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">تضمین کیفیت</h3>
+                        <p class="text-blue-600 mb-4">Jest & Cypress</p>
+                        <p class="text-gray-600 mb-6">تضمین کیفیت و عملکرد بی‌نقص در تمام پلتفرم‌ها</p>
+                        <div class="flex flex-wrap justify-center gap-2 mb-4">
+                            <span class="skill-badge">Testing</span>
+                            <span class="skill-badge">QA</span>
+                            <span class="skill-badge">Automation</span>
+                            <span class="skill-badge">CI/CD</span>
+                            <span class="skill-badge">Performance</span>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="لینکدین تضمین کیفیت">
+                                <i class="fa-brands fa-linkedin fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="گیت‌هاب تضمین کیفیت">
+                                <i class="fa-brands fa-github fa-lg"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="مدیوم تضمین کیفیت">
+                                <i class="fa-brands fa-medium fa-lg"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">نمونه کارها</h2>
+                <div class="project-filter">
+                    <button class="filter-btn active" data-filter="all" aria-label="نمایش همه پروژه‌ها">همه</button>
+                    <button class="filter-btn" data-filter="web" aria-label="نمایش پروژه‌های وب">وب</button>
+                    <button class="filter-btn" data-filter="mobile" aria-label="نمایش پروژه‌های موبایل">موبایل</button>
+                    <button class="filter-btn" data-filter="design" aria-label="نمایش پروژه‌های طراحی">طراحی</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <article class="project-card" data-category="web">
+                        <img src="https://placehold.co/600x400?text=وب" alt="پروژه وب - پلتفرم مدیریت محتوا" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="project-content">
+                            <h3 class="text-xl font-bold mb-2">پروژه وب</h3>
+                            <p class="text-white/90 mb-4">پلتفرم مدیریت محتوا با UI مدرن و عملکرد سریع</p>
+                            <a href="#" class="inline-block px-4 py-2 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition" aria-label="مشاهده پروژه وب">مشاهده پروژه</a>
+                        </div>
+                    </article>
+                    <article class="project-card" data-category="mobile">
+                        <img src="https://placehold.co/600x400?text=موبایل" alt="اپلیکیشن موبایل - ردیابی فعالیت‌های ورزشی" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="project-content">
+                            <h3 class="text-xl font-bold mb-2">اپلیکیشن موبایل</h3>
+                            <p class="text-white/90 mb-4">اپلیکیشنی برای ردیابی فعالیت‌های ورزشی</p>
+                            <a href="#" class="inline-block px-4 py-2 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition" aria-label="مشاهده اپلیکیشن موبایل">مشاهده پروژه</a>
+                        </div>
+                    </article>
+                    <article class="project-card" data-category="design">
+                        <img src="https://placehold.co/600x400?text=طراحی" alt="طراحی UI/UX - تجربه کاربری بصری" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="project-content">
+                            <h3 class="text-xl font-bold mb-2">طراحی UI/UX</h3>
+                            <p class="text-white/90 mb-4">تجربه کاربری بصری و کاربرپسند</p>
+                            <a href="#" class="inline-block px-4 py-2 bg-white text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition" aria-label="مشاهده طراحی UI/UX">مشاهده پروژه</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-10">راه‌های ارتباطی</h2>
+                <p class="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">برای شروع یک پروژه جدید یا پرسیدن سوالات خود، از طریق راه‌های زیر با ما در تماس باشید.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <article class="contact-card group">
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon bg-blue-100 group-hover:bg-blue-600 transition-all duration-300">
+                                <i class="fa-solid fa-envelope fa-2x text-blue-600 group-hover:text-white transition-all duration-300"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">ایمیل</h3>
+                            <a href="mailto:info@frontend.ir" class="text-gray-700 hover:text-blue-600 transition duration-300 flex items-center gap-2" aria-label="ارسال ایمیل به info@frontend.ir">
+                                <i class="fa-solid fa-envelope text-sm"></i>
+                                codepal@gmail.com
+                            </a>
+                        </div>
+                    </article>
+                    <article class="contact-card group">
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon bg-blue-100 group-hover:bg-blue-600 transition-all duration-300">
+                                <i class="fa-brands fa-telegram fa-2x text-blue-600 group-hover:text-white transition-all duration-300"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">تلگرام</h3>
+                            <a href="https://t.me/frontendteam" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 transition duration-300 flex items-center gap-2" aria-label="تماس از طریق تلگرام">
+                                <i class="fa-brands fa-telegram text-sm"></i>
+                                @codepal
+                            </a>
+                        </div>
+                    </article>
+                    <article class="contact-card group">
+                        <div class="flex flex-col items-center">
+                            <div class="contact-icon bg-blue-100 group-hover:bg-blue-600 transition-all duration-300">
+                                <i class="fa-brands fa-github fa-2x text-blue-600 group-hover:text-white transition-all duration-300"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">گیت‌هاب</h3>
+                            <a href="https://github.com/frontend-team" target="_blank" rel="noopener noreferrer" class="text-gray-700 hover:text-blue-600 transition duration-300 flex items-center gap-2" aria-label="مشاهده پروفایل گیت‌هاب">
+                                <i class="fa-brands fa-github text-sm"></i>
+                                پروفایل گیت‌هاب
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-gray-400 text-center">
+        <div class="container mx-auto px-6">
+            <p class="mb-6">© <span id="current-year-footer"></span> کدپال. همه حقوق محفوظ است.</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon" aria-label="لینکدین کدپال">
+                    <i class="fa-brands fa-linkedin fa-lg"></i>
+                </a>
+                <a href="#" class="social-icon" aria-label="گیت‌هاب کدپال">
+                    <i class="fa-brands fa-github fa-lg"></i>
+                </a>
+                <a href="#" class="social-icon" aria-label="توییتر کدپال">
+                    <i class="fa-brands fa-twitter fa-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 800);
+});
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Theme Toggle
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => {
+                        const isDark = document.documentElement.dataset.theme === 'dark';
+                        document.documentElement.dataset.theme = isDark ? 'light' : 'dark';
+                        themeToggle.innerHTML = isDark ? 
+                            '<i class="fa-solid fa-moon fa-lg"></i>' : 
+                            '<i class="fa-solid fa-sun fa-lg"></i>';
+                    });
+                }
+
+                // Mobile Menu
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+
+                // Typed.js
+                if (typeof Typed !== 'undefined') {
+                    new Typed('#typed-text', {
+                        strings: ['توسعه وب‌سایت', 'طراحی رابط کاربری', 'بهینه‌سازی عملکرد'],
+                        typeSpeed: 80,
+                        backSpeed: 40,
+                        backDelay: 2000,
+                        loop: true
+                    });
+                } else {
+                    console.warn('Typed.js not loaded');
+                }
+
+                // Vanilla Tilt
+                if (typeof VanillaTilt !== 'undefined') {
+                    VanillaTilt.init(document.querySelectorAll('.glass-card'), {
+                        max: 15,
+                        speed: 400,
+                        glare: true,
+                        'max-glare': 0.3,
+                        scale: 1.02
+                    });
+                } else {
+                    console.warn('VanillaTilt not loaded');
+                }
+
+                // Project Filter
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                if (filterButtons.length > 0) {
+                    filterButtons.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            filterButtons.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                            
+                            const filter = btn.dataset.filter;
+                            document.querySelectorAll('.project-card').forEach(card => {
+                                card.classList.toggle('hidden', !(filter === 'all' || card.dataset.category === filter));
+                            });
+                        });
+                    });
+                }
+
+                // GSAP Animations
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    gsap.from('.glass-card', {
+                        scrollTrigger: {
+                            trigger: '.glass-card',
+                            start: 'top bottom',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.2
+                    });
+
+                    gsap.from('.project-card', {
+                        scrollTrigger: {
+                            trigger: '.project-card',
+                            start: 'top bottom',
+                            toggleActions: 'play none none reverse'
+                        },
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        stagger: 0.2
+                    });
+                } else {
+                    console.warn('GSAP or ScrollTrigger not loaded');
+                }
+
+                // Current Year
+                const currentYearFooter = document.getElementById('current-year-footer');
+                if (currentYearFooter) {
+                    currentYearFooter.textContent = new Date().getFullYear();
+                }
+            } catch (error) {
+                console.error('Error initializing page:', error);
+            }
+        });
+    </script>
+</body>
+</html>
