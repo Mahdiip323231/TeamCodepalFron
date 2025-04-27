@@ -1,0 +1,446 @@
+:root {
+    --primary: #1E3A8A;
+    --secondary: #3B82F6;
+    --accent-green: #10B981;
+    --accent-red: #EF4444;
+    --accent-orange: #F59E0B;
+    --bg-light: #F9FAFB;
+    --bg-dark: #111827;
+    --text-light: #1F2937;
+    --text-dark: #F9FAFB;
+    --card-bg: #FFFFFF;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --neutral-light: #E5E7EB;
+    --neutral-dark: #4B5563;
+}
+
+[data-theme="dark"] {
+    --bg-light: #111827;
+    --bg-dark: #1F2937;
+    --text-light: #F9FAFB;
+    --text-dark: #E5E7EB;
+    --card-bg: rgba(55,65,81,0.8);
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    /* Define dark theme primary if needed, e.g., based on usage in skill-badge */
+    /* --primary-dark: #some-darker-blue; */
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg-light);
+    color: var(--text-light);
+    line-height: 1.7;
+    transition: background 0.5s, color 0.5s;
+    overflow-x: hidden;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px; /* Added for consistency */
+    padding: 1.5rem; /* Added based on usage in team section */
+    text-align: center; /* Added based on usage in team section */
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.skill-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(45deg, var(--secondary), var(--accent-green));
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+.project-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    color: white;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.project-card:hover .project-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1000;
+}
+
+.floating-button:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+.tech-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+.tech-icon i {
+    font-size: 2rem;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.contact-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+    color: var(--text-light); /* Ensure nav links have color */
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.counter {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.counter:hover {
+    transform: scale(1.1);
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.blob {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.2;
+    animation: blob 20s infinite;
+    z-index: 0; /* Ensure blob is behind content */
+}
+
+@keyframes blob {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+.team-member-image {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem auto; /* Added bottom margin */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease; /* Added transition */
+}
+
+.team-member-image:hover {
+    transform: scale(1.1);
+}
+
+.project-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    background: var(--neutral-light); /* Changed from bg-light for better contrast */
+    color: var(--text-light);
+    transition: background 0.3s ease, color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none; /* Ensure no default border */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.filter-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.filter-btn.active {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.contact-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Added background transition */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--neutral-light); /* Default background */
+}
+
+.contact-icon i {
+    transition: color 0.3s ease; /* Add transition for icon color */
+    color: var(--primary); /* Default icon color */
+}
+
+.contact-card:hover .contact-icon {
+    transform: scale(1.1);
+    background-color: var(--primary); /* Hover background */
+}
+
+.contact-card:hover .contact-icon i {
+    color: white; /* Hover icon color */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+    color: var(--text-light); /* Default color */
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(45deg, #2563EB, #1D4ED8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: opacity .5s;
+}
+#loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .glass-card {
+    background: rgba(31, 41, 55, 0.8); /* Use rgba for transparency */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .skill-badge {
+    /* Assuming --primary-dark is defined or use existing dark theme colors */
+    background: linear-gradient(45deg, var(--primary), var(--secondary)); /* Adjust if needed */
+}
+
+/* Dark theme specific overrides from original inline style */
+[data-theme="dark"] body { background: var(--bg-dark); color: var(--text-dark); }
+[data-theme="dark"] .text-gray-400 { color: var(--neutral-light); } /* Footer text */
+[data-theme="dark"] .text-gray-600 { color: var(--neutral-light); } /* Theme toggle, mobile menu button, team card text */
+[data-theme="dark"] .text-gray-700 { color: var(--text-dark); } /* Hero paragraph, Contact paragraph, Contact links */
+[data-theme="dark"] a.text-gray-700:hover { color: var(--secondary); } /* Contact link hover */
+[data-theme="dark"] #mobile-menu { background-color: var(--bg-dark); border-color: var(--neutral-dark); }
+[data-theme="dark"] #mobile-menu a { color: var(--text-dark); }
+[data-theme="dark"] #mobile-menu a:hover { background-color: rgba(55, 65, 81, 0.8); }
+[data-theme="dark"] header { background: rgba(31, 41, 55, 0.9); border-color: var(--neutral-dark); }
+[data-theme="dark"] .nav-link { color: var(--text-dark); } /* Ensure nav links have dark theme color */
+[data-theme="dark"] .filter-btn { background: var(--bg-dark); color: var(--text-dark); }
+[data-theme="dark"] .filter-btn.active { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+[data-theme="dark"] .filter-btn:hover { background: var(--primary); color: white; }
+[data-theme="dark"] a.border-blue-600 { border-color: var(--secondary); color: var(--secondary); } /* Contact button */
+[data-theme="dark"] a.border-blue-600:hover { background-color: var(--secondary); border-color: var(--secondary); color: white; }
+[data-theme="dark"] .contact-card { background: var(--card-bg); } /* Use variable */
+[data-theme="dark"] .contact-card .contact-icon { background-color: var(--neutral-dark); }
+[data-theme="dark"] .contact-card .contact-icon i { color: var(--secondary); }
+[data-theme="dark"] .contact-card:hover .contact-icon { background-color: var(--secondary); }
+[data-theme="dark"] .contact-card:hover .contact-icon i { color: white; }
+[data-theme="dark"] .social-icon { background: var(--neutral-dark); color: var(--text-dark); }
+[data-theme="dark"] .social-icon:hover { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+[data-theme="dark"] footer { background-color: var(--bg-dark); color: var(--neutral-light); } /* Footer background and text */
+
+
+/* Responsive Styles */
+@media (max-width: 640px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    h1 { /* Target hero h1 specifically if needed */
+        font-size: 2rem;
+    }
+    .team-card { /* This class doesn't exist, maybe meant .glass-card in team section? */
+        margin-bottom: 2rem;
+    }
+    .tech-stack { /* This class doesn't exist */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contact-card {
+        margin-bottom: 1.5rem;
+    }
+    .hero-section h1 { /* Specific targeting */
+         font-size: 2rem;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .team-grid { /* This class doesn't exist, assumed grid on team section */
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .tech-stack { /* This class doesn't exist */
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        max-width: 1200px;
+        margin-left: auto; /* Center container */
+        margin-right: auto; /* Center container */
+    }
+    .team-grid { /* This class doesn't exist, assumed grid on team section */
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .tech-stack { /* This class doesn't exist */
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
